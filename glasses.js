@@ -30,8 +30,8 @@ function setup() {
 
 
   pixelDensity(1);
-  outputWidth = maxWidth;
-  outputHeight = maxWidth * 0.75; // 4:3
+  outputWidth = windowWidth;
+  outputHeight = windowHeight; // 4:3
 
   createCanvas(outputWidth, outputHeight);
 
