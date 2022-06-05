@@ -94,9 +94,9 @@ function drawGlasses(img) {
     if (230 < wy || wy < 110) {
       wy = 110
     }
-    if (wx > 180 && wx < 330) {
-      image(img, positions[41][0], positions[23][1], wx, wy);
-    }
+
+    image(img, positions[41][0], positions[23][1], wx, wy);
+
 
     pop();
   }
@@ -108,6 +108,6 @@ function windowResized() {
   reset()
   pixelDensity(1);
   outputWidth = maxWidth;
-  outputHeight = maxWidth * 0.75; // 4:3
+  outputHeight = maxWidth; // 4:3
   resizeCanvas(outputWidth, outputHeight);
 }
