@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Face Filter</title>
+	</head>
+
+	<body>
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/clmtrackr@1.1.2/build/clmtrackr.min.js"></script>
+        <script src="./glasses.js"></script>
+        <style>
+
+            .select {
+                display: flex;
+                position: absolute;
+                left: 0;
+                bottom: 10%;
+            }
+            .select div {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                margin-right: 20px;
+                font-size: 18px;
+            }
+            select {
+                position: absolute;
+                margin-left: 20px;
+                padding: 8px;
+                font-size: 18px;
+                color: red;
+            }
+
+        </style>
+
+        <div class="select"></div>
+	</body>
+</html>
