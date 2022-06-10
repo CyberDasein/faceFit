@@ -5,8 +5,6 @@ let outputHeight;
 let faceTracker; // Face Tracking
 let videoInput;
 
-let img; // Spiderman Mask Filter
-let imgDogEarRight, imgDogEarLeft, imgDogNose; // Dog Face Filter
 
 let selected = -1; // Default no filter
 
@@ -30,8 +28,8 @@ function setup() {
 
 
   pixelDensity(1);
-  outputWidth = windowWidth;
-  outputHeight = windowHeight; // 4:3
+  outputWidth = maxWidth;
+  outputHeight = maxWidth * 0.75;  // 4:3
 
   createCanvas(outputWidth, outputHeight);
 
