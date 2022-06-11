@@ -12,7 +12,7 @@ let selected = -1; // Default no filter
  * **p5.js** library automatically executes the `preload()` function. Basically, it is used to load external files. In our case, we'll use it to load the images for our filters and assign them to separate variables for later use.
 */
 function preload() {
-  // Spiderman Mask Filter asset
+
   img5 = loadImage("./img/glasses_PNG2.png");
   img2 = loadImage("./img/glasses_PNG3.png");
   img3 = loadImage("./img/glasses_PNG4.png");
