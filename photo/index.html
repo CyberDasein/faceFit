@@ -31,6 +31,7 @@
 				content: 'Выбрать';
 			}
 			#container {
+				overflow: hidden;
 				position : relative;
 				width : 950px;
 				height : 560px;
@@ -163,7 +164,7 @@
 					(function drawLoop() {
 
 						drawRequest = requestAnimFrame(drawLoop);
-						overlayCC.clearRect(0, 0, 920, 576);
+						overlayCC.clearRect(0, 0, 950, 576);
 						const positions = ctrack.getCurrentPosition()
 						if (positions) {
 
@@ -178,7 +179,7 @@
 
 							//ctrack.draw(overlay);
 
-							overlayCC.drawImage(img, positions[2][0], positions[16][1], wx, wy);
+							overlayCC.drawImage(img,  positions[0][0], positions[21][1], wx, wy);
 
 							}
 
@@ -225,14 +226,15 @@
 								var cc = canvas.getContext('2d');
 								let img = new Image();
 								img.onload = function() {
-									if (img.height > 500 || img.width > 700) {
+									if (img.height > 560 || img.width > 860) {
 										var rel = img.height/img.width;
-										var neww = 700;
+										var neww = 860;
 										var newh = neww*rel;
-										if (newh > 500) {
-											newh = 500;
-											neww = newh/rel;
+										if (newh > 800) {
+											newh = 800;
+										    neww = newh/rel;
 										}
+
 										canvas.setAttribute('width', neww);
 										canvas.setAttribute('height', newh);
 										cc.drawImage(img,0,0,neww, newh);
