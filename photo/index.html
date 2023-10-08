@@ -1,292 +1,323 @@
 <!doctype html>
 <html lang="ru">
-	<head>
-		<title>Примерка очков</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
-		<style>
-			@import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
 
-			body {
-				font-family: 'Lato';
-				background-color: #f0f0f0;
-				margin: 0px auto;
-				max-width: 1150px;
-			}
-			.flex {
-				display: flex;
-				align-items: center;
-			}
-			#overlay {
-				position: absolute;
-				top: 0px;
-				left: 0px;
-			}
-			.custom-file {
-				margin-left: 20px;
-				width: 25%;
-			}
-			.custom-file-label::after {
-				content: 'Выбрать';
-			}
-			#container {
-				overflow: hidden;
-				position : relative;
-				width : 950px;
-				height : 560px;
-				/*margin : 0px auto;*/
-			}
+<head>
+	<title>Примерка очков</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		crossorigin="anonymous">
+	<style>
+		@import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
 
-			#content {
-				position: relative;
-				margin-top : 70px;
-				max-width: 1360px;
-			}
-			#convergence {
-				display: inline-block;
-				margin-left: 100px;
-				color: green;
-			}
-			h5 {
-				margin-bottom: 30px;
-			}
+		body {
+			font-family: 'Lato';
+			background-color: #f0f0f0;
+			margin: 0px auto;
+			max-width: 1150px;
+		}
 
-			.btn {
-				font-family: 'Lato';
-				font-size: 16px;
-			}
+		.flex {
+			display: flex;
+			align-items: center;
+		}
 
-			.hide {
-				display : none;
-			}
+		#overlay {
+			position: absolute;
+			top: 0px;
+			left: 0px;
+		}
 
-			.glasses-list {
-				position: absolute;
-				top: 90px;
-				right: 0;
-				list-style: none;
-			}
-			.glasses-list li {
-				margin-bottom: 35px;
-				cursor: pointer;
-			}
-			.glasses-list li:last-child {
-				margin-bottom: 0;
-			}
-		</style>
-	
-	</head>
-	<body>
-        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.min.js"></script>
-		<script src="./js/utils.js"></script>
-		<script src="./js/dat.gui.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/clmtrackr@1.1.2/build/clmtrackr.min.js"></script>
-		<script src="./js/Stats.js"></script>
+		.custom-file {
+			margin-left: 20px;
+			width: 25%;
+		}
 
-		<link rel="stylesheet" type="text/css" href="./styles/imgareaselect-default.css" />
-		<script src="./js/jquery.imgareaselect.pack.js"></script>
-		
-		<div id="content">
-			<h2>Примерка очков по фото</h2>
-			<h5>Выберите своё фото и нажмите старт, затем выберите модель для примерки справа</h5>
-			<div id="container">
-				<canvas id="image" width="950" height="560"></canvas>
-				<canvas id="overlay" width="950" height="560"></canvas>
-			</div>
-			<br/>
-			<div class="flex">
-			<input type="button" class="btn btn-primary" value="Старт" onclick="animateClean()"></input>
-				<div class="custom-file">
-					<input type="file" class="custom-file-input" id="files" name="files[]" />
-					<label class="custom-file-label" for="validatedCustomFile">Выберите файл</label>
-					<div class="invalid-feedback">Выберите фото</div>
-			    </div>
-				<span id="convergence"></span>
-			</div>
-			
+		.custom-file-label::after {
+			content: 'Выбрать';
+		}
 
-			<ul class="glasses-list list-group">
-				<li><img width="180" class="list-group-item model" src="./media/glasses_PNG2.png" alt=""></li>
-				<li><img width="180" class="list-group-item model" src="./media/glasses_PNG3.png" alt=""></li>
-				<li><img width="180" class="list-group-item model" src="./media/glasses_PNG4.png" alt=""></li>
-				<li><img width="180" class="list-group-item model" src="./media/glasses_PNG5.png" alt=""></li>
-				<li><img width="180" class="list-group-item model" src="./media/glasses_PNG6.png" alt=""></li>
-			</ul>
+		#container {
+			overflow: hidden;
+			position: relative;
+			width: 950px;
+			height: 560px;
+			/*margin : 0px auto;*/
+		}
 
+		#content {
+			position: relative;
+			margin-top: 70px;
+			max-width: 1360px;
+		}
 
-			<script>
-				var canvas = document.getElementById('image')
-				var cc = canvas.getContext('2d');
-				var overlay = document.getElementById('overlay');
-				var overlayCC = overlay.getContext('2d');
+		#convergence {
+			display: inline-block;
+			margin-left: 100px;
+			color: green;
+		}
 
-				var img = new Image();
-				
-				img.onload = function() {
-					cc.drawImage(img,0,0);
-				};
-				
-				img.src = './media/photo2.jpg';
+		h5 {
+			margin-bottom: 30px;
+		}
 
-				var img2 = new Image();
+		.btn {
+			font-family: 'Lato';
+			font-size: 16px;
+		}
 
-				img2.onload = function() {
-					cc.drawImage(img,0,0);
-				};
-				img2.src = './media/glasses_PNG6.png';
+		.hide {
+			display: none;
+		}
 
-				var ctrack = new clm.tracker({stopOnConvergence : true});
-				ctrack.init();
+		.glasses-list {
+			position: absolute;
+			top: 90px;
+			right: 0;
+			list-style: none;
+		}
 
-				stats = new Stats();
-				stats.domElement.style.position = 'absolute';
-				stats.domElement.style.top = '0px';
-				document.getElementById('container').appendChild( stats.domElement );
+		.glasses-list li {
+			margin-bottom: 35px;
+			cursor: pointer;
+		}
 
-				var drawRequest;
+		.glasses-list li:last-child {
+			margin-bottom: 0;
+		}
+	</style>
 
-				function animateClean() {
-					ctrack.start(canvas);
-					drawFit(img2);
-					
-				}
+</head>
 
-				function animate(box) {
-					ctrack.start(canvas, box);
-					
-					drawFit(img2);
-				}
+<body>
+	<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+		integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.min.js"></script>
+	<script src="./js/utils.js"></script>
+	<script src="./js/dat.gui.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/clmtrackr@1.1.2/build/clmtrackr.min.js"></script>
+	<script src="./js/Stats.js"></script>
 
-				function drawFit(img) {
-					
-					(function drawLoop() {
+	<link rel="stylesheet" type="text/css" href="./styles/imgareaselect-default.css" />
+	<script src="./js/jquery.imgareaselect.pack.js"></script>
 
-						drawRequest = requestAnimFrame(drawLoop);
-						overlayCC.clearRect(0, 0, 950, 576);
-						const positions = ctrack.getCurrentPosition()
-						if (positions) {
-
-							let wx = Math.abs(positions[14][0] - positions[0][0])  ;
-							let wy = Math.abs(positions[21][1] - positions[34][1]) * 1.2; 
-							let left = positions[27]
-							let leftX = left[0]
-							let leftY = left[1]
-							let right = positions[32]
-							let rightX = right[0]
-							let rightY = right[1]
-
-							//ctrack.draw(overlay);
-
-							overlayCC.drawImage(img,  positions[0][0], positions[21][1], wx, wy);
-
-							}
-
-						})()
-
-				}
-			
-
-				// detect if tracker fails to find a face
-				document.addEventListener("clmtrackrNotFound", function(event) {
-					ctrack.stop();
-					alert("The tracking had problems with finding a face in this image. Try selecting the face in the image manually.")
-				}, false);
-
-				// detect if tracker loses tracking of face
-				document.addEventListener("clmtrackrLost", function(event) {
-					ctrack.stop();
-					alert("The tracking had problems converging on a face in this image. Try selecting the face in the image manually.")
-				}, false);
-
-				// detect if tracker has converged
-				document.addEventListener("clmtrackrConverged", function(event) {
-					document.getElementById('convergence').innerHTML = "Готово";
-					// stop drawloop
-					cancelRequestAnimFrame(drawRequest);
-				}, false);
-
-				// update stats on iteration
-				document.addEventListener("clmtrackrIteration", function(event) {
-					stats.update();
-				}, false);
-
-
-				// function to start showing images
-				function loadImage() {
-					if (fileList.indexOf(fileIndex) < 0) {
-						var reader = new FileReader();
-						reader.onload = (function(theFile) {
-							return function(e) {
-								// check if positions already exist in storage
-
-								// Render thumbnail.
-								var canvas = document.getElementById('image')
-								var cc = canvas.getContext('2d');
-								let img = new Image();
-								img.onload = function() {
-									if (img.height > 560 || img.width > 860) {
-										var rel = img.height/img.width;
-										var neww = 860;
-										var newh = neww*rel;
-										if (newh > 800) {
-											newh = 800;
-										    neww = newh/rel;
-										}
-
-										canvas.setAttribute('width', neww);
-										canvas.setAttribute('height', newh);
-										cc.drawImage(img,0,0,neww, newh);
-									} else {
-										canvas.setAttribute('width', img.width);
-										canvas.setAttribute('height', img.height);
-										cc.drawImage(img,0,0,img.width, img.height);
-									}
-								}
-								img.src = e.target.result;
-							};
-						})(fileList[fileIndex]);
-						reader.readAsDataURL(fileList[fileIndex]);
-						overlayCC.clearRect(0, 0, 720, 576);
-						
-						document.getElementById('convergence').innerHTML = "";
-						ctrack.reset();
-
-						drawFit(img)
-					
-					}
-
-				}
-
-				// set up file selector and variables to hold selections
-				var fileList, fileIndex;
-				if (window.File && window.FileReader && window.FileList) {
-					function handleFileSelect(evt) {
-						var files = evt.target.files;
-						fileList = [];
-						for (var i = 0;i < files.length;i++) {
-							if (!files[i].type.match('image.*')) {
-								continue;
-							}
-							fileList.push(files[i]);
-						}
-						if (files.length > 0) {
-							fileIndex = 0;
-						}
-
-						loadImage();
-					}
-					document.getElementById('files').addEventListener('change', handleFileSelect, false);
-				} else {
-					$('#files').addClass("hide");
-					$('#loadimagetext').addClass("hide");
-				}
-
-				$(".model").on("click", (e) => {
-					drawFit(e.target)
-				})
-			</script>
+	<div id="content">
+		<h2>Примерка очков по фото</h2>
+		<h5>Выберите своё фото и нажмите старт, затем выберите модель для примерки справа</h5>
+		<div id="container">
+			<canvas id="image" width="950" height="560"></canvas>
+			<canvas id="overlay" width="950" height="560"></canvas>
 		</div>
-	</body>
+		<br />
+		<div class="flex">
+			<input type="button" class="btn btn-primary" value="Старт" onclick="animateClean()"></input>
+			<div class="custom-file">
+				<input type="file" class="custom-file-input" id="files" name="files[]" />
+				<label class="custom-file-label" for="validatedCustomFile">Выберите файл</label>
+				<div class="invalid-feedback">Выберите фото</div>
+			</div>
+			<span id="convergence"></span>
+		</div>
+
+
+		<ul class="glasses-list list-group">
+			<li><img width="180" class="list-group-item model" src="./media/glasses_PNG2.png" alt=""></li>
+			<li><img width="180" class="list-group-item model" src="./media/glasses_PNG3.png" alt=""></li>
+			<li><img width="180" class="list-group-item model" src="./media/glasses_PNG4.png" alt=""></li>
+			<li><img width="180" class="list-group-item model" src="./media/glasses_PNG5.png" alt=""></li>
+			<li><img width="180" class="list-group-item model" src="./media/glasses_PNG6.png" alt=""></li>
+		</ul>
+
+
+		<script>
+			var canvas = document.getElementById('image')
+			var cc = canvas.getContext('2d');
+			var overlay = document.getElementById('overlay');
+			var overlayCC = overlay.getContext('2d');
+
+			var img = new Image();
+
+			img.onload = function () {
+				canvas.width = img.width;
+				canvas.height = img.height;
+				cc.drawImage(img, 0, 0, img.width, img.height);
+			};
+
+			img.src = './media/photo2.jpg';
+
+			var img2 = new Image();
+
+			img2.onload = function () {
+				cc.drawImage(img, 0, 0);
+			};
+			img2.src = './media/glasses_PNG6.png';
+
+			var ctrack = new clm.tracker({ stopOnConvergence: true });
+			ctrack.init();
+
+			stats = new Stats();
+			stats.domElement.style.position = 'absolute';
+			stats.domElement.style.top = '0px';
+			document.getElementById('container').appendChild(stats.domElement);
+
+			var drawRequest;
+
+			function animateClean() {
+				ctrack.start(canvas);
+				drawFit(img2);
+
+			}
+
+			function animate(box) {
+				ctrack.start(canvas, box);
+
+				drawFit(img2);
+			}
+
+			let lastPositions;
+
+			function drawFit(img) {
+
+				(function drawLoop() {
+					const positions = ctrack.getCurrentPosition();
+
+					// Проверяем, изменились ли положения лица
+					if (!positions || JSON.stringify(positions) === JSON.stringify(lastPositions)) {
+						// Если положения не изменились, ждем следующего кадра и прекращаем анимацию
+						cancelRequestAnimFrame(drawRequest);
+					}
+
+					lastPositions = positions;
+
+					overlayCC.clearRect(0, 0, 950, 560);
+
+					ctrack.draw(overlay);
+					if (positions) {
+						// Находим координаты глаз
+						const leftEyeX = positions[27][0];
+						const leftEyeY = positions[27][1];
+						const rightEyeX = positions[32][0];
+						const rightEyeY = positions[32][1];
+
+						// Вычисляем угол наклона
+						const angleRadians = Math.atan2(rightEyeY - leftEyeY, rightEyeX - leftEyeX);
+
+						// Вычисляем размеры межды точками лица 
+						const width = Math.abs(positions[14][0] - positions[0][0]);
+						const height = Math.abs(positions[21][1] - positions[62][1]);
+
+						console.log(img.width / img.height)
+						console.log(width / height)
+
+						// Поворачиваем и рисуем изображение очков
+						overlayCC.save();
+						overlayCC.translate(positions[41][0], positions[41][1]);
+						overlayCC.rotate(angleRadians);
+						overlayCC.drawImage(img, -width / 2, -height / 2, width, height);
+
+						overlayCC.restore();
+					}
+					drawRequest = requestAnimationFrame(drawLoop);
+				})();
+			}
+
+
+
+			// detect if tracker fails to find a face
+			document.addEventListener("clmtrackrNotFound", function (event) {
+				ctrack.stop();
+				alert("The tracking had problems with finding a face in this image. Try selecting the face in the image manually.")
+			}, false);
+
+			// detect if tracker loses tracking of face
+			document.addEventListener("clmtrackrLost", function (event) {
+				ctrack.stop();
+				alert("The tracking had problems converging on a face in this image. Try selecting the face in the image manually.")
+			}, false);
+
+			// detect if tracker has converged
+			document.addEventListener("clmtrackrConverged", function (event) {
+				document.getElementById('convergence').innerHTML = "Готово";
+				// stop drawloop
+				cancelRequestAnimFrame(drawRequest);
+			}, false);
+
+			// update stats on iteration
+			document.addEventListener("clmtrackrIteration", function (event) {
+				stats.update();
+			}, false);
+
+
+			// function to start showing images
+			function loadImage() {
+				if (fileList.indexOf(fileIndex) < 0) {
+					var reader = new FileReader();
+					reader.onload = (function (theFile) {
+						return function (e) {
+							// Render thumbnail.
+							var canvas = document.getElementById('image')
+							var cc = canvas.getContext('2d');
+							let img = new Image();
+							img.onload = function () {
+								var maxHeight = 560; // максимальная высота
+								var scaleFactor = maxHeight / img.height;
+
+								var newWidth = img.width * scaleFactor;
+								var newHeight = maxHeight;
+								console.log(newHeight, newWidth)
+								canvas.setAttribute('width', newWidth);
+								canvas.setAttribute('height', newHeight);
+								overlay.setAttribute('width', newWidth);
+								overlay.setAttribute('height', newHeight);
+								cc.drawImage(img, 0, 0, newWidth, newHeight);
+							}
+							img.src = e.target.result;
+						};
+					})(fileList[fileIndex]);
+
+					reader.readAsDataURL(fileList[fileIndex]);
+					overlayCC.clearRect(0, 0, 950, 560);
+
+					document.getElementById('convergence').innerHTML = "";
+					ctrack.reset();
+
+					drawFit(img)
+				}
+			}
+
+			// set up file selector and variables to hold selections
+			var fileList, fileIndex;
+			if (window.File && window.FileReader && window.FileList) {
+				function handleFileSelect(evt) {
+					var files = evt.target.files;
+					fileList = [];
+					for (var i = 0; i < files.length; i++) {
+						if (!files[i].type.match('image.*')) {
+							continue;
+						}
+						fileList.push(files[i]);
+					}
+					if (files.length > 0) {
+						fileIndex = 0;
+					}
+
+					loadImage();
+				}
+				document.getElementById('files').addEventListener('change', handleFileSelect, false);
+			} else {
+				$('#files').addClass("hide");
+				$('#loadimagetext').addClass("hide");
+			}
+
+			$(".model").on("click", (e) => {
+				$(".model").each(function (ind, el) {
+					$(el).css("border", "none");
+				});
+				$(e.target).css("border", "1px solid red")
+				img2.src = e.target.src
+			})
+		</script>
+	</div>
+</body>
+
 </html>
